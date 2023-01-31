@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameBoard extends World
 {
-    private final int NUM_CARDS_IN_DECK = 27;
+    private final int NUM_CARDS_IN_DECK = 81;
     
     public GameBoard()
     {   

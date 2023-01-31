@@ -59,7 +59,8 @@ public class Player extends Actor
                                selectedCardsIndex.add(new Integer(i));
                          }
                   }
-            }
+        }
+        
     }
     
     private void resetCardsSelected()

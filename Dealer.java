@@ -72,6 +72,10 @@ public class Dealer extends Actor
                 }
             }
         }
+        else
+        {
+            Animations.wobble(cardsSelected);
+        }
     }
     
     private void removeAndReplaceTriple(ArrayList<Card> cardsOnBoard, Card[] cardsSelected, 
