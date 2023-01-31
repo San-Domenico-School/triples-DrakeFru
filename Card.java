@@ -10,7 +10,7 @@ public class Card extends Actor
 {
     public enum Shape
     {
-        TRIANGLE, RECTANGLE, CIRCLE, NO_SHAPE
+        TRIANGLE, SQUARE, CIRCLE, NO_SHAPE
     }
     
     public enum Color
@@ -44,6 +44,11 @@ public class Card extends Actor
     public Color getColor()
     {
         return color;
+    }
+    
+    public boolean getIsSelected()
+    {
+        return isSelected;
     }
     
     public int getNumberOfShapes()

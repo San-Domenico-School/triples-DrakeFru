@@ -1,18 +1,25 @@
-/**
- * Write a description of class Deck here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+import java.util.ArrayList;
 
 import greenfoot.*;
 
+
+
 public class Deck 
 {
-    /****************************************************
-    ***   Leave as comment until ready to implement   ***
-    *****************************************************
-    // adds all the cards to the unshuffled deck.   
+    
+    Card[] unShuffledDeck;
+    
+    ArrayList<Card> shuffledDeck;
+    
+    Deck(int numOfCardsInDeck)
+    {
+        numOfCardsInDeck = limitNumCardsInDeck(numOfCardsInDeck);  // limits size to 27 or 81        
+        unShuffledDeck = new Card[numOfCardsInDeck + 1];           // playing cards plus blank card
+        shuffledDeck = new ArrayList<>();                          // Instantiates ArrayList with no elements
+        populateUnshuffledDeckWithCards(numOfCardsInDeck);         // Initializes Unshuffled Deck
+        createShuffledDeck();                                      // Initializes shuffled deck excluding blank card
+    }
+       
     private void populateUnshuffledDeckWithCards(int numOfCardsInDeck)        
     {
         unShuffledDeck[0] = new Card(Card.Shape.NO_SHAPE, Card.Color.NO_COLOR,0,0,
@@ -45,7 +52,7 @@ public class Deck
         unShuffledDeck[9] = new Card(Card.Shape.CIRCLE, Card.Color.RED,3,0,
                 new GreenfootImage("Triplets_0/circle_red_3_0.png"), 
                 new GreenfootImage("Triplets_0/circle_red_3_0_selected.png"));
-         unShuffledDeck[10] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,1,0,
+        unShuffledDeck[10] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,1,0,
                 new GreenfootImage("Triplets_0/square_blue_1_0.png"), 
                 new GreenfootImage("Triplets_0/square_blue_1_0_selected.png"));
         unShuffledDeck[11] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,2,0,
@@ -128,7 +135,7 @@ public class Deck
             unShuffledDeck[36] = new Card(Card.Shape.CIRCLE, Card.Color.RED,3,1,
                     new GreenfootImage("Triplets_1/circle_red_3_1.png"), 
                     new GreenfootImage("Triplets_1/circle_red_3_1_selected.png"));
-             unShuffledDeck[37] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,1,1,
+            unShuffledDeck[37] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,1,1,
                     new GreenfootImage("Triplets_1/square_blue_1_1.png"), 
                     new GreenfootImage("Triplets_1/square_blue_1_1_selected.png"));
             unShuffledDeck[38] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,2,1,
@@ -211,7 +218,7 @@ public class Deck
                 unShuffledDeck[63] = new Card(Card.Shape.CIRCLE, Card.Color.RED,3,2,
                         new GreenfootImage("Triplets_2/circle_red_3_2.png"), 
                         new GreenfootImage("Triplets_2/circle_red_3_2_selected.png"));
-                 unShuffledDeck[64] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,1,2,
+                unShuffledDeck[64] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,1,2,
                         new GreenfootImage("Triplets_2/square_blue_1_2.png"), 
                         new GreenfootImage("Triplets_2/square_blue_1_2_selected.png"));
                 unShuffledDeck[65] = new Card(Card.Shape.SQUARE, Card.Color.BLUE,2,2,
@@ -269,5 +276,56 @@ public class Deck
           }
     }
     
-    **************  END OF COMMENT BLOCK  ***************/
+    public int getNumCardsInDeck()
+    {
+        return shuffledDeck.size();
+        //keeps track of how many unused cards remain in the deck
+    }
+    
+    public Card getTopCard()
+    {
+        return shuffledDeck.remove(0);
+        //returns the top card of the deck as the cards are dealt 
+    }
+    
+    protected Card getShuffledCard(int place)
+    {
+        return shuffledDeck.get(place);
+        //returns a card at a specific location in the deck
+    }
+    
+    protected ArrayList getShuffledDeck()
+    {
+        return shuffledDeck;
+        //returns the entire shuffled deck
+    }
+    
+    protected int limitNumCardsInDeck(int amount)
+    {
+        if(amount <= 27)
+        {
+            return 27;
+        }
+        else
+        {
+            return 81;
+        }
+        //forces the number of cards in the unshuffled deck to either be 27 (3 set of 3 characteristics of triples) 
+        // or 81(3 set of 4 characteristics of triples)
+    }
+    
+    public void createShuffledDeck()
+    {
+        for (Card numCard : unShuffledDeck)
+        {
+            shuffledDeck.add((int) (Math.random() * shuffledDeck.size()), numCard);
+        }
+        shuffledDeck.remove(shuffledDeck.size() - 1);
+        //shuffles the unshuffled deck to form the shuffled deck.  Removes blank card.
+    }
+    
+    
+    
+    
+    
 }
